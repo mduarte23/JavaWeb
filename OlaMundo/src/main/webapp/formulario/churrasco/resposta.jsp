@@ -15,6 +15,10 @@
 		double carne = (homem * 0.300) + (mulher * 0.270) + (crianca * 0.250);
 		double cerveja = (homem * 2) + (mulher * 1.5);
 		double refrigerante = (homem * 0.3) + (mulher * 0.6) + (crianca * 1);
+		
+		if (homem > mulher){
+			response.sendRedirect("erro.jsp");
+		}
 	%>
 	
 	<div>
