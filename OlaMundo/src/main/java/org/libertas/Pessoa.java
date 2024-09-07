@@ -1,10 +1,33 @@
 package org.libertas;
 
 public class Pessoa {
+	private int idpessoa;
+	
 	private String nome;
 	private String telefone;
 	private String email;
 	private String cidade;
+	private String endereco;
+	private String cep;
+	
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	public int getIdpessoa() {
+		return idpessoa;
+	}
+	public void setIdpessoa(int idpessoa) {
+		this.idpessoa = idpessoa;
+	}
 	
 	public String getNome() {
 		return nome;

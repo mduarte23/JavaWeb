@@ -9,7 +9,7 @@
 <body>
 	<h1>Exemplo de cadastro</h1>
 	
-	<a href="formulario.jsp">Novo Cadastro</a>
+	<a href="formulario.jsp?id=0">Novo Cadastro</a>
 	<br/>
 	<a href="listar.jsp">Listar</a>
 
