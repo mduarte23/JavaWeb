@@ -8,6 +8,14 @@ import java.util.LinkedList;
 public class PessoaDao {
 	//private static LinkedList<Pessoa> lista = new LinkedList<Pessoa>();
 	
+	public void salvar(Pessoa p) {
+		if (p.getIdpessoa()>0) {
+			alterar(p);
+		}else {
+			inserir(p);
+		}
+	}
+	
 	public void inserir(Pessoa p) {
 		//lista.add(p);
 		//abre a conexao com o bd
