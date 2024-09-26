@@ -53,6 +53,11 @@ public class Pessoa {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+	@Override
+	public String toString() {
+		return "";
+	}
+
 	
 	
 }

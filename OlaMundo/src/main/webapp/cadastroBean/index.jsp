@@ -12,6 +12,7 @@
 
 	<jsp:useBean id="pdao" scope="page" class="org.libertas.PessoaDao" />
 	
+	<a href="formulario.jsp?idpessoa=0">Novo</a>
 	<table border="1" width="100%">
 		<th>Nome</th>
 		<th>Telefone</th>
