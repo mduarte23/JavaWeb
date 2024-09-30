@@ -1,5 +1,3 @@
-<%@page import="org.filmes.Filme"%>
-<%@page import="org.filmes.FilmeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,10 +8,15 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<title>Listar</title>
+<title>Excluir</title>
 </head>
 <body>
 
+	<jsp:useBean id="f" class="org.filmes.Filme" scope="page"/>
+	<jsp:useBean id="fdao" class="org.filmes.FilmeDao" scope="page"/>
+	<jsp:setProperty property="*" name="f"/>
+	
+	${fdao.excluir(f)}
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.jsp"> <img class="logo"
 			src="img/logo.webp" alt="Logo" style="width: 70px; heigth: auto;">
@@ -31,48 +34,18 @@
 				<li  class="nav-item">
 					<a class="nav-link text-white " href="formulario.jsp?id=0">Cadastrar Novo Filme</a>
 				</li>
-				<li class="nav-item"><a class="nav-link text-white active" href="listar.jsp">Listar Filmes</a>
+				<li class="nav-item"><a class="nav-link text-white" href="listar.jsp">Listar Filmes</a>
 				</li>
 
 			</ul>
 		</div>
 	</nav>
 	
-	<h1 class="text-center mt-5">Filmes Cadastrados</h1>
-
-	<div class="container d-flex justify-content-center col-11">
-	<table class="table table-striped table-bordered table-hover col-12">
-		<th class="text-center">ID</th>
-		<th class="text-center">Nome</th>
-		<th class="text-center">Diretor</th>
-		<th class="text-center">Genero</th>
-		<th class="text-center">Ano</th>
-		<th class="text-center">Streaming</th>
-		<th class="text-center">Opção</th>
-		
-		
-		<%
-			FilmeDao fdao = new FilmeDao();
-			for (Filme f : fdao.listar()){
-				out.print("<tr>");
-				out.print("<td class='text-center'>" + f.getId_filme() + "</td>");
-				out.print("<td class='text-center'>" + f.getNome() + "</td>");
-				out.print("<td class='text-center'>" + f.getDiretor() + "</td>");
-				out.print("<td class='text-center'>" + f.getGenero() + "</td>");
-				out.print("<td class='text-center'>" + f.getAno() + "</td>");
-				out.print("<td class='text-center'>" + f.getStreaming() + "</td>");
-				out.print("<td class='text-center'>");
-				out.print("<a href='formulario.jsp?id=" + f.getId_filme() + "' class='btn btn-primary btn-sm btn-warning text-dark text-decoration-none mr-2'>Alterar</a>");
-				out.print("<a href='excluir.jsp?id=" + f.getId_filme() + "' class='btn btn-primary btn-sm btn-danger text-dark text-decoration-none'>Excluir</a>");
-				out.print("</tr>");
-			}
-		
-		%>
-		
-	</table>
-	</div>
+	<h1 class="text-center mt-5">Filme excluido com sucesso</h1>
+	<br/>
 	
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 	<script
@@ -83,6 +56,6 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
-	
+
 </body>
 </html>

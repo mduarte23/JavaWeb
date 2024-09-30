@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -11,7 +12,6 @@
 <title>Filmes</title>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.jsp"> <img class="logo"
 			src="img/logo.webp" alt="Logo" style="width: 70px; heigth: auto;">
@@ -35,6 +35,7 @@
 			</ul>
 		</div>
 	</nav>
+
 	
 	
 	<h1 class="text-center mt-5">Cadastro de Filmes</h1>
@@ -48,6 +49,10 @@
 	</button>
 	
 	</div>
+	
+	
+
+
 	
 	
 	
