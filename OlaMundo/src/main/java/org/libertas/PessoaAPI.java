@@ -68,10 +68,13 @@ public class PessoaAPI extends HttpServlet {
 		
 		//salva a nova pessoa
 		PessoaDao pdao = new PessoaDao();
-		pdao.inserir(p);
+//		pdao.inserir(p);
+		
+		
 		
 		//envia a resposta
-		String resposta = "inserido com sucesso";
+		String resposta = gson.toJson(pdao.inserir(p));
+		response.setHeader("content-type", "application/json");
 		response.getWriter().print(resposta);
 	}
 	
@@ -97,8 +100,10 @@ public class PessoaAPI extends HttpServlet {
 		PessoaDao pdao = new PessoaDao();
 		pdao.alterar(p);
 				
+		
 		//envia a resposta
-		String resposta = "alterado com sucesso";
+		String resposta = gson.toJson(pdao.alterar(p));
+		response.setHeader("content-type", "application/json");
 		response.getWriter().print(resposta);		
 		
 		
@@ -118,12 +123,15 @@ public class PessoaAPI extends HttpServlet {
 		//exclui a nova pessoa
 		PessoaDao pdao = new PessoaDao();
 		Pessoa p = new Pessoa();
+		Gson gson = new Gson();
 		p.setIdpessoa(id);
 		pdao.excluir(p);
 		
 		//evia resposta
-		String resposta = "Excluido com sucesso";
-		response.getWriter().print(resposta);
+		
+		String resposta = gson.toJson(pdao.excluir(p));
+		response.setHeader("content-type", "application/json");
+		response.getWriter().print(resposta);	
 	}
 
 }

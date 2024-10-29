@@ -16,11 +16,12 @@ public class PessoaDao {
 		}
 	}
 	
-	public void inserir(Pessoa p) {
+	public Retorno inserir(Pessoa p) {
 		//lista.add(p);
 		//abre a conexao com o bd
 		Conexao con = new Conexao();
 		
+		RetornoDao retornoDao = new RetornoDao();
 		try {
 			String sql = "INSERT INTO pessoa (nome, telefone, email, cidade, endereco, cep)"
 					+ " VALUES (?,?,?,?,?,?)";
@@ -32,11 +33,28 @@ public class PessoaDao {
 			prep.setString(5,  p.getEndereco());
 			prep.setString(6,  p.getCep());
 			prep.execute();
+			
+			String mensagem = "Inserido com sucesso!";
+			Boolean resposta = true;
+			
+			Retorno retorno = retornoDao.RetornoJson(resposta, mensagem);
+			
+			//fecha a conexao com o banco de dados 
+			con.desconecta();
+			return retorno;
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			//fecha a conexao com o banco de dados 
+			con.desconecta();
+			String mensagem = "Falha ao inserir!";
+			Boolean resposta = false;
+			
+			Retorno retorno = retornoDao.RetornoJson(resposta, mensagem);
+			
+			return retorno;
 		}
-		//fecha a conexao com o banco de dados 
-		con.desconecta();
 	}
 	public LinkedList<Pessoa> listar() {
 		//return lista;
@@ -64,8 +82,11 @@ public class PessoaDao {
 		return lista;
 	}
 	
-	public void alterar(Pessoa p) {
+	public Retorno alterar(Pessoa p) {
 		Conexao con = new Conexao();
+		
+		RetornoDao retornoDao = new RetornoDao();
+		
 		try {
 			String sql = "UPDATE pessoa SET"
 					+" nome = ?, telefone = ?," 
@@ -81,23 +102,64 @@ public class PessoaDao {
 			prep.setString(6, p.getCep());
 			prep.setInt(7, p.getIdpessoa());
 			prep.execute();
+			
+			String mensagem = "Alterado com sucesso!";
+			Boolean resposta = true;
+			
+			Retorno retorno = retornoDao.RetornoJson(resposta, mensagem);
+			
+			//fecha a conexao com o banco de dados 
+			con.desconecta();
+			return retorno;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			String mensagem = "Falha ao alterar!";
+			Boolean resposta = false;
+			
+			Retorno retorno = retornoDao.RetornoJson(resposta, mensagem);
+			
+			//fecha a conexao com o banco de dados 
+			con.desconecta();
+			
+			return retorno;
 		}
-		con.desconecta();
+		
 	}
-	public void excluir(Pessoa p) {
+	public Retorno excluir(Pessoa p) {
 		Conexao con = new Conexao();
+		
+		RetornoDao retornoDao = new RetornoDao();
+		
 		try {
 			String sql = "DELETE FROM pessoa"
 					+ " WHERE idpessoa = ?";
 			PreparedStatement prep = con.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getIdpessoa());
 			prep.execute();
+			
+			String mensagem = "Excluido com sucesso!";
+			Boolean resposta = true;
+			
+			Retorno retorno = retornoDao.RetornoJson(resposta, mensagem);
+			
+			//fecha a conexao com o banco de dados 
+			con.desconecta();
+			return retorno;
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			String mensagem = "Falha ao excluir!";
+			Boolean resposta = false;
+			
+			Retorno retorno = retornoDao.RetornoJson(resposta, mensagem);
+			
+			//fecha a conexao com o banco de dados 
+			con.desconecta();
+			
+			return retorno;
 		}
-		con.desconecta();
+		
 	}
 	
 	public Pessoa consultar(int id) {
