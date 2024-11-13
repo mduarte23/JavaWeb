@@ -86,7 +86,8 @@
 							+ "<th>Nome</th>"
 							+ "<th>Telefone</th>"
 							+ "<th>E-mail</th>"
-							+ "<th>Cidade</th>";
+							+ "<th>Cidade</th>"
+							+ "<th></th>";
 							
 				for (i in dados){
 					tab += "<tr>" + "<td>" + dados[i].idpessoa + "</td>"
@@ -94,6 +95,10 @@
 					+ "<td>" + dados[i].telefone + "</td>"
 					+ "<td>" + dados[i].email + "</td>"
 					+ "<td>" + dados[i].cidade + "</td>"
+					+"<td>"
+					+"<a href='#' onclick='alterar("+ dados[i].idpessoa+")'><img src='img/edit.svg'>"
+					+"<a href='#' onclick='excluir("+ dados[i].idpessoa+")'><img src='img/trash-2.svg'>"
+					+"</td>"
 					+ "</tr>";
 				}
 		
@@ -104,6 +109,12 @@
 		
 		function novo(){
 			//chama a função que mostra o formulario
+			//limpar os valores do campo
+			
+			document.getElementById("nome").value = "";
+			document.getElementById("telefone").value = "";
+			document.getElementById("email").value  = "";
+			document.getElementById("cidade").value  = "";
 			modal.show();
 		}
 		
@@ -130,6 +141,23 @@
 				listar();
 			});
 			
+		}
+		
+		function alterar(idpessoa){
+			alert("alterando " + idpessoa);
+		}
+		
+		function excluir(idpessoa){
+			//requisiçao para chamar API alterar
+			//chama a API passando o id
+			fetch("../PessoaAPI/" + idpessoa,
+					{method: "DELETE"}
+			).then(resp => resp.json())
+			.then(function (resposta){
+				alert(resposta.mensagem);
+				//lista as funçoes ovamente
+				listar();
+			});
 		}
 
 	</script>
