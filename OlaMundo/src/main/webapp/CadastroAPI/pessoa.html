@@ -12,7 +12,16 @@
 </head>
 <body>
 	<h1>Cadastro</h1>
-	<button type="button" class="btn btn-primary" onclick="novo()">Novo</button> 
+	<div class="input-group mb-3">
+		<button type="button" class="btn btn-primary" onclick="novo()">Novo</button>
+		
+		<input type="text" class="form-control"
+			placeholder="Pesquisa" aria-label="Pesquisa"
+			aria-describedby="button-addon2" id="pesquisa">
+		<button class="btn btn-outline-secondary" type="button"
+			id="button-addon2" onclick="listar()">Pesquisa</button>
+	</div>
+
 	<div id="resposta"></div>
 
 
@@ -63,6 +72,28 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="excluir" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Excluir
+						Pessoa</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">Confirmar a Exclusao do registro</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Não</button>
+					<button type="button" class="btn btn-primary"
+						onclick="excluirsim()">Excluir</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -72,11 +103,18 @@
 	<script>
 		//Carregar o formulario
 		const modal = new bootstrap.Modal('#formulario')
+		const modalexcluir = new bootstrap.Modal('#excluir')
 		listar();
+		//variavel para salvar o id
+		var idatual = 0;
 		
 		function listar(){
 			document.getElementById("resposta").innerHTML = "aguarde...carregando...";
-			fetch("../PessoaAPI")
+			
+			let pesquisa = document.getElementById("pesquisa").value;
+			
+			
+			fetch("../PessoaAPI?pesquisa=" + pesquisa)
 				.then(resp => resp.json())
 				.then(dados => mostrar(dados));
 		
@@ -108,6 +146,8 @@
 		}
 		
 		function novo(){
+			//garantir qua nao vai alterar um registro anterior
+			idatual = -1;
 			//chama a função que mostra o formulario
 			//limpar os valores do campo
 			
@@ -129,9 +169,19 @@
 			//transforma o objeto pessoa em JSON
 			let body = JSON.stringify(pessoa);
 			
+			let endereco = "../PessoaAPI";
+			let metodo = "POST";
+			
+			
+			//verificaçao se é alteração ou novo cadastro 
+			if (idatual > 0){
+				endereco = "../PessoaAPI/" + idatual;
+				metodo = "PUT";
+			}
+			
 			//faz a requisição da API para inserir o JSON na lista 
-			fetch("../PessoaAPI", 
-				{method: "POST", body: body}		
+			fetch(endereco, 
+				{method: metodo, body: body}		
 			).then(resp => resp.json())
 			.then(function (resposta){
 				alert(resposta.mensagem);
@@ -144,17 +194,37 @@
 		}
 		
 		function alterar(idpessoa){
-			alert("alterando " + idpessoa);
+			idatual = idpessoa;
+			fetch("../PessoaAPI/"+ idpessoa)	
+				.then(resp => resp.json())
+				.then(function (resposta){
+					document.getElementById("nome").value = resposta.nome;
+					document.getElementById("telefone").value = resposta.telefone;
+					document.getElementById("email").value  = resposta.email;
+					document.getElementById("cidade").value  = resposta.cidade;
+					
+					modal.show();
+				});
 		}
 		
 		function excluir(idpessoa){
+			//recebe o id para a variavel global
+			idatual = idpessoa;
+			//exibe o modal
+			modalexcluir.show();
+			
+		}
+		
+		function excluirsim(){
 			//requisiçao para chamar API alterar
 			//chama a API passando o id
-			fetch("../PessoaAPI/" + idpessoa,
+			fetch("../PessoaAPI/" + idatual,
 					{method: "DELETE"}
 			).then(resp => resp.json())
 			.then(function (resposta){
 				alert(resposta.mensagem);
+				//esconde o modal
+				modalexcluir.hide();
 				//lista as funçoes ovamente
 				listar();
 			});

@@ -40,13 +40,13 @@ public class PessoaAPI extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
+				
+		String pesquisa = request.getParameter("pesquisa");
 		
 		String resposta;
-		if (id==0) {
+		if (id == 0) {
 			//listar todos
-			resposta = gson.toJson(pdao.listar());
+			resposta = gson.toJson(pdao.listar(pesquisa));
 		} else {
 			//consultar apenas 1
 			resposta = gson.toJson(pdao.consultar(id));

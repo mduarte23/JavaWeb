@@ -12,7 +12,7 @@ private Connection connection;
 			//abre a conexao com o banco de dados
 			connection = DriverManager.getConnection(
 					"jdbc:mysql://127.0.0.1:3306/"
-					+"filme?verifyServerCertificate=false&useSSL=false",
+					+"cliente?verifyServerCertificate=false&useSSL=false",
 					"root", "98245803");
 		} catch (Exception e) {
 			e.printStackTrace();

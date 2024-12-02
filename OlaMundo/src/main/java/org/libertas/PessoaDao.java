@@ -56,14 +56,18 @@ public class PessoaDao {
 			return retorno;
 		}
 	}
-	public LinkedList<Pessoa> listar() {
+	public LinkedList<Pessoa> listar(String pesquisa) {
 		//return lista;
 		LinkedList<Pessoa> lista = new LinkedList<Pessoa>();
 		Conexao con = new Conexao();
 		try {
-			String sql = "SELECT * FROM pessoa ORDER BY nome";
-			Statement sta = con.getConnection().createStatement();
-			ResultSet res = sta.executeQuery(sql);
+			String sql = "SELECT * FROM pessoa "
+					+ "WHERE nome like ? "
+					+ "ORDER BY nome";
+			PreparedStatement sta = con.getConnection().prepareStatement(sql);
+			sta.setString(1,  "%" + pesquisa + "%");
+			
+			ResultSet res = sta.executeQuery();
 			while (res.next()) {
 				Pessoa p = new Pessoa();
 				p.setIdpessoa(res.getInt("idpessoa"));
@@ -91,7 +95,7 @@ public class PessoaDao {
 			String sql = "UPDATE pessoa SET"
 					+" nome = ?, telefone = ?," 
 					+ "email = ? , cidade = ?,"
-					+ "endereco = ? , cep = ?"
+					+ "endereco = ? , cep = ? "
 					+ "WHERE idpessoa = ?";
 			PreparedStatement prep = con.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getNome());

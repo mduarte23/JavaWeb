@@ -8,8 +8,8 @@
 </head>
 <body>
 
-	<jsp:useBean id="p" class="org.libertas.Pessoa" scope="page"/>
-	<jsp:useBean id="pdao" class="org.libertas.PessoaDao" scope="page"/>
+	<jsp:useBean id="p" class="org.libertas.Cliente" scope="page"/>
+	<jsp:useBean id="pdao" class="org.libertas.ClienteDao" scope="page"/>
 	<jsp:setProperty property="*" name="p"/>
 	${ pdao.excluir(p)}
 	Registro excluido com sucesso!

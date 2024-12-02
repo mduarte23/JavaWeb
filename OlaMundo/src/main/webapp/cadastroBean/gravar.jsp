@@ -11,8 +11,8 @@
 <body>
 
 	<!--  scope é onde a aplicacao vai funcionar -->
-	<jsp:useBean id="p" scope="page" class="org.libertas.Pessoa"/>
-	<jsp:useBean id="pdao" scope="page" class="org.libertas.PessoaDao"/>
+	<jsp:useBean id="p" scope="page" class="org.libertas.Cliente"/>
+	<jsp:useBean id="pdao" scope="page" class="org.libertas.ClienteDao"/>
 	<!-- 	Tudo isso pode ser substituido quando property e param sao iguais
 	<jsp:setProperty property="nome" name="p" param="nome"/>
 	<jsp:setProperty property="telefone" name="p" param="telefone"/>

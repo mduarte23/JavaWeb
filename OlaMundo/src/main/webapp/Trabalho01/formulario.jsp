@@ -1,5 +1,5 @@
-<%@page import="org.libertas.PessoaDao"%>
-<%@page import="org.libertas.Pessoa"%>
+<%@page import="org.libertas.ClienteDao"%>
+<%@page import="org.libertas.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,9 +11,9 @@
 <body>
 
 	<%
-		int idpessoa = Integer.parseInt(request.getParameter("id"));
-		Pessoa p = new Pessoa();
-		PessoaDao pdao = new PessoaDao();
+	int idpessoa = Integer.parseInt(request.getParameter("id"));
+		Cliente p = new Cliente();
+		ClienteDao pdao = new ClienteDao();
 		if (idpessoa > 0){
 			p = pdao.consultar(idpessoa);
 		} else {
@@ -28,7 +28,7 @@
 	%>
 
 	<form action="gravar.jsp" method="post">
-		<input type="hidden" name="idpessoa" value="<%=p.getIdpessoa() %>" />
+		<input type="hidden" name="idpessoa" value="<%=p.getIdclientea()%>" />
 	
 		Nome:
 		<input type="text" name="nome" value="<%= p.getNome() %>"/>
@@ -40,7 +40,7 @@
 		<input type="text" name= "email" value="<%= p.getTelefone() %>"/>
 		<br/>
 		Cidade:
-		<input type="text" name="cidade" value="<%= p.getEmail() %>"/>
+		<input type="text" name="cidade" value="<%=p.getCPF()%>"/>
 		<br/>
 		Endereco:
 		<input type="text" name="endereco" value="<%= p.getEndereco() %>"/>

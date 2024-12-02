@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<jsp:useBean id="pdao" scope="page" class="org.libertas.PessoaDao" />
+	<jsp:useBean id="pdao" scope="page" class="org.libertas.ClienteDao" />
 	
 	<a href="formulario.jsp?idpessoa=0">Novo</a>
 	<table border="1" width="100%">
