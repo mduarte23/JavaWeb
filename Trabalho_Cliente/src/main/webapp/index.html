@@ -17,7 +17,7 @@
 		
 		<input type="text" class="form-control"
 			placeholder="Pesquisa" aria-label="Pesquisa"
-			aria-describedby="button-addon2" id="pesquisa">
+			aria-describedby="button-addon2" id="pesquisa" oninput="listar()">
 		<button class="btn btn-outline-secondary" type="button"
 			id="button-addon2" onclick="listar()">Pesquisa</button>
 	</div>
@@ -141,7 +141,7 @@
 							+ "<th></th>";
 							
 				for (i in dados){
-					tab += "<tr>" + "<td>" + dados[i].id_cliente + "</td>"
+					tab += "<tr>" + "<td>" + dados[i].idcliente + "</td>"
 					+ "<td>" + dados[i].nome + "</td>"
 					+ "<td>" + dados[i].telefone + "</td>"
 					+ "<td>" + dados[i].cpf + "</td>"
@@ -219,7 +219,7 @@
 				.then(function (resposta){
 					document.getElementById("nome").value = resposta.nome;
 					document.getElementById("telefone").value = resposta.telefone;
-					document.getElementById("cpf").value  = resposta.email;
+					document.getElementById("cpf").value  = resposta.cpf;
 					document.getElementById("cidade").value  = resposta.cidade;
 					document.getElementById("endereco").value  = resposta.endereco;
 					document.getElementById("cep").value  = resposta.cep;
